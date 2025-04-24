@@ -1,0 +1,95 @@
+Policy:
+
+{
+
+    "Version": "2012-10-17",
+
+    "Statement": [
+
+        {
+
+            "Sid": "ReadStream",
+
+            "Effect": "Allow",
+
+            "Action": [
+
+                "kinesis:DescribeStreamSummary",
+
+                "kinesis:GetShardIterator",
+
+                "kinesis:GetRecords",
+
+                "kinesis:ListShards",
+
+                "kinesis:DescribeStream"
+
+            ],
+
+            "Resource": "arn:aws:kinesis:*:<account>:stream/*"
+
+        },
+
+        {
+
+            "Sid": "ListStream",
+
+            "Effect": "Allow",
+
+            "Action": "kinesis:ListStreams",
+
+            "Resource": "*"
+
+        }
+
+    ]
+
+}
+
+Trust policy:
+
+{
+
+    "Version": "2012-10-17",
+
+    "Statement": [
+
+        {
+
+            "Effect": "Allow",
+
+            "Principal": {
+
+                "Service": [
+
+                    "events.amazonaws.com",
+
+                    "redshift.amazonaws.com"
+
+                ]
+
+            },
+
+            "Action": "sts:AssumeRole",
+
+            "Condition": {
+
+                "StringEquals": {
+
+                    "AWS:SourceAccount": "1234567890"
+
+                },
+
+                "ArnEquals": {
+
+  "AWS:SourceArn": "arn:aws:dms:us-east-1: 1234567890:rep:6LO4G7A4SNG4PC732QEDP772OY" 
+
+                }
+
+            }
+
+        }
+
+    ]
+
+}
